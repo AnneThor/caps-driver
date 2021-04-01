@@ -14,23 +14,24 @@ socket.emit('join', driver);
 socket.on('pickup', pickup);
 socket.on('in-transit', intransit);
 
-function pickup (payload, event) {
+function pickup (payload) {
   setTimeout(() => {
-    console.log(`DRIVER: picked up ${payload.orderID}`);
-    let event = { event: 'in-transit' };
-    socket.emit('in-transit', payload, event);
+    console.log(`picking up ${payload.orderID}`);
+    // let event = { event: 'in-transit' };
+    socket.emit('in-transit', payload);
   }, 1500);
 }
 
-function intransit (payload, event) {
+function intransit (payload) {
   setTimeout(() => {
-    console.log(`DRIVER: delivered order ${payload.orderID}`);
-    let event = { event: 'delivered' }
-    socket.emit('delivered', payload, event);
+    console.log(`delivered ${payload.orderID}`);
+    // let event = { event: 'delivered' }
+    socket.emit('delivered', payload);
   }, 3000);
 }
 
 module.exports = {
   pickup: pickup,
-  intransit: intransit
+  intransit: intransit,
+  socket: socket
 }

@@ -1,6 +1,6 @@
 'use strict';
 
-const { pickup, intransit } = require('../driver.js');
+const { pickup, intransit, socket } = require('../driver.js');
 
 describe("VENDOR functionality", () => {
 
@@ -12,13 +12,10 @@ describe("VENDOR functionality", () => {
     address: '1428 Elm Street',
   }
 
-  let pickupEvent = { event: 'pickup' };
-  let inTransitEvent = { event: 'in-transit' };
-
   let spy;
 
   beforeEach(()=> {
-    spy = jest.spyOn(console, 'log').mockImplementation();
+    // spy = jest.spyOn(console, 'log').mockImplementation();
     jest.useFakeTimers();
   })
 
@@ -27,17 +24,33 @@ describe("VENDOR functionality", () => {
   })
 
   test('that pickup method logs correctly', () => {
-    pickup(payload, pickupEvent);
+    spy = jest.spyOn(console, 'log').mockImplementation();
+    pickup(payload);
     jest.advanceTimersByTime(1500);
     expect(spy).toHaveBeenCalled();
-    expect(spy).toHaveBeenCalledWith(`DRIVER: picked up ${payload.orderID}`);
+    expect(spy).toHaveBeenCalledWith(`picking up ${payload.orderID}`);
+  })
+
+  test('that the pickup method emits an intransit', () => {
+    spy = jest.spyOn(socket, 'emit').mockImplementation();
+    pickup(payload)
+    jest.advanceTimersByTime(1500);
+    expect(spy).toHaveBeenCalled();
   })
 
   test('that in-transit method logs correctly', () => {
-    intransit(payload, inTransitEvent);
+    spy = jest.spyOn(console, 'log').mockImplementation();
+    intransit(payload);
     jest.advanceTimersByTime(3000);
     expect(spy).toHaveBeenCalled();
-    expect(spy).toHaveBeenCalledWith(`DRIVER: delivered order ${payload.orderID}`);
+    expect(spy).toHaveBeenCalledWith(`delivered ${payload.orderID}`);
+  })
+
+  test('that the intransit method emits a delivered event', () => {
+    spy = jest.spyOn(socket, 'emit').mockImplementation();
+    pickup(payload)
+    jest.advanceTimersByTime(1500);
+    expect(spy).toHaveBeenCalled();
   })
 
 })
