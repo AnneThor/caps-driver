@@ -1,0 +1,23 @@
+{
+  "name": "caps-driver",
+  "version": "1.0.0",
+  "description": "Mimics driver functionality in parcel delivery service",
+  "main": "driver.js",
+  "scripts": {
+    "test": "jest --coverage"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AnneThor/caps-driver.git"
+  },
+  "author": "Anne Thorsteinson",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AnneThor/caps-driver/issues"
+  },
+  "homepage": "https://github.com/AnneThor/caps-driver#readme",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "socket.io-client": "^2.4.0"
+  }
+}
