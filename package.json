@@ -4,6 +4,7 @@
   "description": "Mimics driver functionality in parcel delivery service",
   "main": "driver.js",
   "scripts": {
+    "start": "nodemon driver.js",
     "test": "jest --coverage"
   },
   "repository": {
