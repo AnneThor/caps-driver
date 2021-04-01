@@ -5,7 +5,7 @@
   "main": "driver.js",
   "scripts": {
     "start": "nodemon driver.js",
-    "test": "jest --coverage"
+    "test": "jest --coverage --detectOpenHandles"
   },
   "repository": {
     "type": "git",
@@ -20,5 +20,8 @@
   "dependencies": {
     "dotenv": "^8.2.0",
     "socket.io-client": "^2.4.0"
+  },
+  "devDependencies": {
+    "jest": "^26.6.3"
   }
 }
