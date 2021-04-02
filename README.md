@@ -12,7 +12,7 @@ An event based app that is a socket client for the CAPS socket server app. This 
 ```.env``` requirements:
 
 - ```PORT```
-- ```DRIVER_ID```: this can be used in the future to direct messages back to specific drivers only
+- ```DRIVER_ID```: set the driver id
 
 ## Running the App
 
