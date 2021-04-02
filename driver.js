@@ -7,7 +7,7 @@ const port = process.env.PORT || 3000;
 const host = `http://localhost:${port}/caps`;
 const socket = io.connect(host);
 
-const driver = 'driver';
+const driver = process.env.DRIVER_ID || 'driver';
 
 socket.emit('join', driver);
 
@@ -17,8 +17,7 @@ socket.on('in-transit', intransit);
 function pickup (payload) {
   setTimeout(() => {
     console.log(`picking up ${payload.orderID}`);
-    // let event = { event: 'in-transit' };
-    socket.emit('in-transit', payload);
+    socket.emit('in-transit', payload, driver);
   }, 1500);
 }
 
